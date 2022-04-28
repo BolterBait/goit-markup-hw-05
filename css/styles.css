@@ -88,6 +88,8 @@ img {
   font-size: 14px;
   line-height: 1.14;
   letter-spacing: 0.02em;
+
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .site-nav .link:active {
@@ -102,6 +104,22 @@ img {
 .site-nav .current {
   color: var(--link-hover-color);
 }
+.current {
+  position: relative;
+}
+
+.current::after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  left: 0;
+  bottom: -1px;
+  background-color: var(--link-hover-color);
+}
+
 .contacts {
   display: flex;
   margin-left: auto;
@@ -125,6 +143,9 @@ img {
 .post-address,
 .project-link {
   text-decoration: none;
+
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .mail-link,
@@ -227,6 +248,13 @@ img {
   padding: 6px 22px;
   border-radius: 4px;
   border: 1px solid var(--border-color);
+
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.25);
+
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    border 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .button-svg {
   padding: 0;
@@ -297,6 +325,7 @@ img {
 }
 
 .works-images .list {
+  position: relative;
   width: 370px;
   margin-right: 30px;
 }
@@ -304,6 +333,31 @@ img {
 .works-images .list:last-child {
   margin-right: 0;
 }
+
+.overlay-works {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 70px;
+
+  background-color: rgba(47, 48, 58, 0.8);
+}
+
+.work-text {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 1.14px;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: #ffffff;
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 /* -----------------Advantages--------------------------- */
 .advantages-text {
   color: var(--second-text-color);
@@ -437,6 +491,8 @@ img {
   align-items: center;
   background-color: rgba(255, 255, 255, 0.1);
   fill: rgb(255, 255, 255);
+
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .conect-soc-list {
@@ -501,6 +557,9 @@ img {
   align-items: center;
   background-color: var(--background-text-color);
   fill: rgba(175, 177, 184, 1);
+
+  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .member-soc-link:hover,
@@ -549,6 +608,9 @@ img {
 
 .project-link {
   display: block;
+  box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.12), 0 0 0 0 rgba(0, 0, 0, 0.06),
+    0 0 0 0 rgba(0, 0, 0, 0.16);
+  transition: box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .project-link:hover,
@@ -573,6 +635,34 @@ img {
   box-sizing: border-box;
 }
 
+.project-card-thumb {
+  position: relative;
+  overflow: hidden;
+}
+
+.project-link:hover .project-card-text {
+  transform: translateY(0);
+}
+
+.project-card-text {
+  position: absolute;
+  padding-top: 63px;
+  padding-right: 24px;
+  padding-left: 24px;
+  padding-bottom: 63px;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.56;
+  letter-spacing: 0.03em;
+  color: #ffffff;
+  background-color: rgba(33, 150, 243, 0.9);
+  transform: translateY(100%);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 .mail,
 .tel {
   font-style: normal;
@@ -588,6 +678,9 @@ img {
   align-items: center;
   background-color: var(--background-text-color);
   fill: rgba(175, 177, 184, 1);
+
+  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .our-partners-list {
@@ -603,4 +696,46 @@ img {
 .our-partners-link:focus {
   fill: var(--link-hover-color);
   border: 1px solid var(--link-hover-color);
+}
+
+/* -------------------------------Backdrop---------------------------------------- */
+
+.backdrop {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.modal {
+  position: absolute;
+  width: 528px;
+  min-height: 581px;
+  background-color: #ffffff;
+  border-radius: 4px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.modal-btn-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.is-hidden {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
 }
